@@ -108,7 +108,7 @@ public class MaximalRectangle85 {
                     stack.pop();
                 }
 
-                down[i] = stack.isEmpty() ? -1 : stack.peek();
+                down[i] = stack.isEmpty() ? m : stack.peek();
                 stack.push(i);
             }
 

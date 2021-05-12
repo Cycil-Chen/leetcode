@@ -39,7 +39,7 @@ public class LargestRectangleinHistogram84 {
             while (! stack.isEmpty() && heights[stack.peek()] >= heights[i]) {
                 stack.pop();
             }
-            right[i] = (stack.isEmpty() ? -1 : stack.peek());
+            right[i] = (stack.isEmpty() ? n : stack.peek());
             stack.push(i);
         }
 

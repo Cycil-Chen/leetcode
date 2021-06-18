@@ -42,4 +42,38 @@ public class CanPlaceFlowers605 {
         }
         return count >= n;
     }
+
+    public boolean canPlaceFlowers2(int[] flowerbed, int n) {
+        if (n == 0) {
+            return true;
+        }
+        if (flowerbed.length == 1) {
+            return n == 1 ? flowerbed[0] == 0 : false;
+        }
+
+        int count = 0;
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (count >= n) {
+                return true;
+            }
+            if (i == 0 && flowerbed[i] == 0 && flowerbed[i + 1] == 0) {
+                flowerbed[i] = 1;
+                count++;
+                continue;
+            }
+            if (i - 1 >= 0 && i + 1 < flowerbed.length && flowerbed[i - 1] == 0 && flowerbed[i] == 0 && flowerbed[i + 1] == 0) {
+                flowerbed[i] = 1;
+                count++;
+            }
+            if (i == flowerbed.length - 1 && flowerbed[i - 1] == 0 && flowerbed[i] == 0) {
+                count++;
+            }
+        }
+        return count >= n;
+    }
+
+    public static void main(String [] args) {
+        int [] flowerbed = {1,0,0,0,1};
+        new CanPlaceFlowers605().canPlaceFlowers2(flowerbed, 1);
+    }
 }

@@ -43,6 +43,12 @@ public class CanPlaceFlowers605 {
         return count >= n;
     }
 
+    /**
+     * 方法二  判断
+     * @param flowerbed
+     * @param n
+     * @return
+     */
     public boolean canPlaceFlowers2(int[] flowerbed, int n) {
         if (n == 0) {
             return true;
@@ -71,6 +77,69 @@ public class CanPlaceFlowers605 {
         }
         return count >= n;
     }
+
+    /**
+     * 方法三
+     * @param flowerbed
+     * @param n
+     * @return
+     */
+    public boolean canPlaceFlowers3(int[] flowerbed, int n) {
+        for (int i = 0; i < flowerbed.length && n > 0;) {
+            // 判断方式很重要
+            if (flowerbed[i] == 1) {
+                i += 2;
+            } else if (i == flowerbed.length - 1 || flowerbed[i + 1] == 0) {
+                n--;
+                i += 2;
+            } else {
+                //flowerbed[i]==0 && i != flowerbed.length-1 && flowerbed[i+1]==1
+                i += 3;
+            }
+        }
+        return n <= 0;
+    }
+
+    /**
+     * 方法四
+     * @param flowerbed
+     * @param n
+     * @return
+     */
+    public boolean canPlaceFlowers4(int[] flowerbed, int n) {
+        int count = 0;
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (flowerbed[i] == 0 && (i == flowerbed.length - 1 || flowerbed[i + 1] == 0)
+                    && (i == 0 || flowerbed[i - 1] == 0)) {
+                flowerbed[i] = 1;
+                count++;
+            }
+        }
+        return count >= n;
+    }
+
+    /**
+     * 方法五
+     * @param flowerbed
+     * @param n
+     * @return
+     */
+    public boolean canPlaceFlowers5(int[] flowerbed, int n) {
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (n == 0) break;
+            if (flowerbed[i] == 1) continue;
+            // 因为上面有if判断，走到left说明i=0时，flowerbed[0]就是0,否则进入下一次循环了
+            int left = i > 0 ? flowerbed[i - 1] : 0;
+            // 对于i=flowerbed.length-1 同理
+            int right = i < flowerbed.length - 1 ? flowerbed[i + 1] : 0;
+            if (left == 0 && right == 0) {
+                flowerbed[i] = 1;
+                n--;
+            }
+        }
+        return n == 0;
+    }
+
 
     public static void main(String [] args) {
         int [] flowerbed = {1,0,0,0,1};
